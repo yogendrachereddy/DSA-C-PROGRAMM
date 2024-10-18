@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+class Array {
+private:
+    int size;
+    int *data;
+
+public:
+    Array(int s) : size(s) {
+        data = new int[size];
+        for (int i = 0; i < size; i++) {
+            data[i] = 0;  
+        }
+    }
+    ~Array() {
+        delete[] data;
+    }
+    int& operator[](int index) {
+        if (index < 0 || index >= size) {
+            cout << "Index out of bounds" << endl;
+            exit(1);  
+        }
+        return data[index]; 
+    }
+    void display() const {
+        for (int i = 0; i < size; i++) {
+            cout << data[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Array arr(5);  
+    arr[0] = 10;
+    arr[1] = 20;
+    arr[2] = 30;
+    arr[3] = 40;
+    arr[4] = 50;
+    cout << "Array elements: ";
+    arr.display();
+    cout << "Element at index 2: " << arr[2] << endl;
+    cout << "Accessing out of bounds index: ";
+    cout << arr[5] << endl;  
+
+    return 0;
+}
